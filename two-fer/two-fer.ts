@@ -1,7 +1,7 @@
 class TwoFer {
-  static twoFer( /* Parameters go here */ ) {
-    // Your code here
-  }
+    static twoFer(who: string = "you") {
+        return `One for ${who}, one for me.`
+    }
 }
 
 export default TwoFer
