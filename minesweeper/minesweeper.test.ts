@@ -11,11 +11,11 @@ describe('Minesweeper()', () => {
         expect(minesweeper.annotate([])).toEqual([])
     })
 
-    xit('handles no columns', () => {
+    it('handles no columns', () => {
         expect(minesweeper.annotate([''])).toEqual([''])
     })
 
-    xit('handles no mines', () => {
+    it('handles no mines', () => {
         const input = [
             '   ',
             '   ',
@@ -29,7 +29,7 @@ describe('Minesweeper()', () => {
         expect(minesweeper.annotate(input)).toEqual(expected)
     })
 
-    xit('handles board with only mines', () => {
+    it('handles board with only mines', () => {
         const input = [
             '***',
             '***',
@@ -43,7 +43,7 @@ describe('Minesweeper()', () => {
         expect(minesweeper.annotate(input)).toEqual(expected)
     })
 
-    xit('handles mine surrounded by spaces', () => {
+    it('handles mine surrounded by spaces', () => {
         const input = [
             '   ',
             ' * ',
@@ -57,7 +57,7 @@ describe('Minesweeper()', () => {
         expect(minesweeper.annotate(input)).toEqual(expected)
     })
 
-    xit('handles space surrounded by mines', () => {
+    it('handles space surrounded by mines', () => {
         const input = [
             '***',
             '* *',
@@ -71,7 +71,7 @@ describe('Minesweeper()', () => {
         expect(minesweeper.annotate(input)).toEqual(expected)
     })
 
-    xit('handles space surrounded by mines', () => {
+    it('handles space surrounded by mines', () => {
         const input = [
             '***',
             '* *',
@@ -85,19 +85,19 @@ describe('Minesweeper()', () => {
         expect(minesweeper.annotate(input)).toEqual(expected)
     })
 
-    xit('handles horizontal line', () => {
+    it('handles horizontal line', () => {
         const input = [' * * ']
         const expected = ['1*2*1']
         expect(minesweeper.annotate(input)).toEqual(expected)
     })
 
-    xit('handles horizontal line, mines at edges', () => {
+    it('handles horizontal line, mines at edges', () => {
         const input = ['*   *']
         const expected = ['*1 1*']
         expect(minesweeper.annotate(input)).toEqual(expected)
     })
 
-    xit('handles vertical line', () => {
+    it('handles vertical line', () => {
         const input = [
             ' ',
             '*',
@@ -115,7 +115,7 @@ describe('Minesweeper()', () => {
         expect(minesweeper.annotate(input)).toEqual(expected)
     })
 
-    xit('handles vertical line, mines at edges', () => {
+    it('handles vertical line, mines at edges', () => {
         const input = [
             '*',
             ' ',
@@ -133,7 +133,7 @@ describe('Minesweeper()', () => {
         expect(minesweeper.annotate(input)).toEqual(expected)
     })
 
-    xit('handles cross', () => {
+    it('handles cross', () => {
         const input = [
             '  *  ',
             '  *  ',
@@ -151,7 +151,7 @@ describe('Minesweeper()', () => {
         expect(minesweeper.annotate(input)).toEqual(expected)
     })
 
-    xit('handles large board', () => {
+    it('handles large board', () => {
         const input = [
             ' *  * ',
             '  *   ',
