@@ -1,3 +1,8 @@
+enum Direction {
+    ENCODE = 1,
+    DECODE = -1
+}
+
 const ALL_LETTERS = "abcdefghijklmnopqrstuvwxyz"
 const A = "a".charCodeAt(0)
 
@@ -12,23 +17,23 @@ class SimpleCipher {
     }
 
     encode(plain: string): string {
-        let encrypted = ""
-        for (let i = 0; i < plain.length; i++) {
-            const char = plain[i].charCodeAt(0) - A
-            const keyChar = this.key[i % this.key.length].charCodeAt(0) - A
-            encrypted += String.fromCodePoint(A + ((char + keyChar) % 26))
-        }
-        return encrypted
+        return this.transform(plain, Direction.ENCODE)
     }
 
     decode(encrypted: string): string {
-        let plain = ""
-        for (let i = 0; i < encrypted.length; i++) {
-            const char = encrypted[i].charCodeAt(0) - A
-            const keyChar = this.key[i % this.key.length].charCodeAt(0) - A
-            plain += String.fromCodePoint(A + ((char - keyChar + 26) % 26))
+        return this.transform(encrypted, Direction.DECODE)
+    }
+
+    private transform(original: string, direction: Direction): string {
+        let transformed = ""
+        for (let i = 0; i < original.length; i++) {
+            const char = original[i].charCodeAt(0) - A
+            const keyChar =
+                (this.key[i % this.key.length].charCodeAt(0) - A) * direction +
+                26
+            transformed += String.fromCodePoint(A + ((char + keyChar) % 26))
         }
-        return plain
+        return transformed
     }
 
     private static randomKey(): string {
