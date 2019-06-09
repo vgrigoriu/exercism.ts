@@ -5,12 +5,13 @@ enum Direction {
 
 const ALL_LETTERS = "abcdefghijklmnopqrstuvwxyz"
 const A = "a".charCodeAt(0)
+const DEFAULT_KEY_LENGTH = 100
 
 class SimpleCipher {
     key: string
 
     constructor(key: string = SimpleCipher.randomKey()) {
-        if (!key.match(/^[a-z]+$/)) {
+        if (!key.match(`^[${ALL_LETTERS}]+$`)) {
             throw "Bad key"
         }
         this.key = key
@@ -30,15 +31,15 @@ class SimpleCipher {
             const char = original[i].charCodeAt(0) - A
             const keyChar =
                 (this.key[i % this.key.length].charCodeAt(0) - A) * direction +
-                26
-            transformed += String.fromCodePoint(A + ((char + keyChar) % 26))
+                ALL_LETTERS.length
+            transformed += String.fromCharCode(A + ((char + keyChar) % ALL_LETTERS.length))
         }
         return transformed
     }
 
     private static randomKey(): string {
         let key = ""
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < DEFAULT_KEY_LENGTH; i++) {
             key += ALL_LETTERS.charAt(
                 Math.floor(Math.random() * ALL_LETTERS.length)
             )
