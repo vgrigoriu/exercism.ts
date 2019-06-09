@@ -1,3 +1,5 @@
+const ALL_LETTERS = "abcdefghijklmnopqrstuvwxyz"
+
 class SimpleCipher {
     key: string
 
@@ -25,17 +27,16 @@ class SimpleCipher {
         for (let i = 0; i < encrypted.length; i++) {
             const char = encrypted[i].charCodeAt(0) - a
             const keyChar = this.key[i % this.key.length].charCodeAt(0) - a
-            plain += String.fromCodePoint(a + (char - keyChar + 26) % 26)
+            plain += String.fromCodePoint(a + ((char - keyChar + 26) % 26))
         }
         return plain
     }
 
     private static randomKey(): string {
-        const allLetters = "abcdefghijklmnopqrstuvwxyz"
         let key = ""
         for (let i = 0; i < 100; i++) {
-            key += allLetters.charAt(
-                Math.floor(Math.random() * allLetters.length)
+            key += ALL_LETTERS.charAt(
+                Math.floor(Math.random() * ALL_LETTERS.length)
             )
         }
 
