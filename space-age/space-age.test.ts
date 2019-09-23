@@ -18,7 +18,7 @@ describe('Space Age', () => {
     expect(age.onMercury()).toEqual(280.88)
   })
 
-  xit('age in venus years', () => {
+  it('age in venus years', () => {
     const age = new SpaceAge(189839836)
     expect(age.onEarth()).toEqual(6.02)
     expect(age.onVenus()).toEqual(9.78)

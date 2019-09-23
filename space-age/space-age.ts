@@ -14,7 +14,7 @@ export default class SpaceAge {
     }
 
     onVenus(): number {
-        return -1
+        return this.round(this.seconds / 19411026)
     }
 
     onMars(): number {
