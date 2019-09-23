@@ -6,7 +6,7 @@ export default class SpaceAge {
     }
 
     onEarth(): number {
-        return -1
+        return this.seconds / 31555695.803092458188
     }
 
     onMercury(): number {

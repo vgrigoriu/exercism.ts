@@ -7,7 +7,7 @@ describe('Space Age', () => {
     expect(age.seconds).toEqual(1000000)
   })
 
-  xit('age in earth years', () => {
+  it('age in earth years', () => {
     const age = new SpaceAge(1000000000)
     expect(age.onEarth()).toEqual(31.69)
   })
