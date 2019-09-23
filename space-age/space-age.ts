@@ -34,7 +34,7 @@ export default class SpaceAge {
     }
 
     onNeptune(): number {
-        return -1
+        return this.round(this.seconds / 5196280668)
     }
 
     private round(x: number): number {
