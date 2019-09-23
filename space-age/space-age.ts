@@ -22,7 +22,7 @@ export default class SpaceAge {
     }
 
     onJupiter(): number {
-        return -1
+        return this.round(this.seconds / 374222565)
     }
 
     onSaturn(): number {
