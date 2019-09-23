@@ -42,7 +42,7 @@ describe('Space Age', () => {
     expect(age.onSaturn()).toEqual(3.23)
   })
 
-  xit('age in uranus years', () => {
+  it('age in uranus years', () => {
     const age = new SpaceAge(3210123456)
     expect(age.onEarth()).toEqual(101.72)
     expect(age.onUranus()).toEqual(1.21)

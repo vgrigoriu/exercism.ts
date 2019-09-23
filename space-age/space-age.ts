@@ -30,7 +30,7 @@ export default class SpaceAge {
     }
 
     onUranus(): number {
-        return -1
+        return this.round(this.seconds / 2652994591)
     }
 
     onNeptune(): number {
