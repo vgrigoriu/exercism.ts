@@ -4,19 +4,20 @@ class Transcriptor {
     }
 }
 
-const map: { [nucleotide: string]: string } = {
-    C: "G",
-    G: "C",
-    A: "U",
-    T: "A"
-}
+const map: Map<string, string> = new Map([
+    ["C", "G"],
+    ["G", "C"],
+    ["A", "U"],
+    ["T", "A"],
+])
 
 function transcribe(nucleotide: string): string {
-    if (!map.hasOwnProperty(nucleotide)) {
+    const transcription = map.get(nucleotide)
+    if (transcription === undefined) {
         throw "Invalid input DNA."
     }
 
-    return map[nucleotide]
+    return transcription
 }
 
 export default Transcriptor
