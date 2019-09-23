@@ -6,7 +6,7 @@ export default class SpaceAge {
     }
 
     onEarth(): number {
-        return this.round(this.seconds / 31555695)
+        return this.round(this.seconds / 31558000)
     }
 
     onMercury(): number {
@@ -26,7 +26,7 @@ export default class SpaceAge {
     }
 
     onSaturn(): number {
-        return -1
+        return this.round(this.seconds / 928792569)
     }
 
     onUranus(): number {
