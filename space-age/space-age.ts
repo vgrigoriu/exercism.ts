@@ -42,7 +42,7 @@ export default class SpaceAge {
     }
 
     private round(x: number): number {
-        return Math.round(x * 100) / 100
+        return Number(x.toFixed(2))
     }
 }
 
