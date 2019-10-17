@@ -6,38 +6,53 @@ export default class SpaceAge {
     }
 
     onEarth(): number {
-        return this.round(this.seconds / 31558000)
+        return this.yearsOn(Planet.Earth)
     }
 
     onMercury(): number {
-        return this.round(this.seconds / 7600525)
+        return this.yearsOn(Planet.Mercury)
     }
 
     onVenus(): number {
-        return this.round(this.seconds / 19411026)
+        return this.yearsOn(Planet.Venus)
     }
 
     onMars(): number {
-        return this.round(this.seconds / 59359776)
+        return this.yearsOn(Planet.Mars)
     }
 
     onJupiter(): number {
-        return this.round(this.seconds / 374222565)
+        return this.yearsOn(Planet.Jupiter)
     }
 
     onSaturn(): number {
-        return this.round(this.seconds / 928792569)
+        return this.yearsOn(Planet.Saturn)
     }
 
     onUranus(): number {
-        return this.round(this.seconds / 2652994591)
+        return this.yearsOn(Planet.Uranus)
     }
 
     onNeptune(): number {
-        return this.round(this.seconds / 5196280668)
+        return this.yearsOn(Planet.Neptune)
+    }
+
+    private yearsOn(planet: Planet) : number {
+        return this.round(this.seconds / planet)
     }
 
     private round(x: number): number {
         return Math.round(x * 100) / 100
     }
+}
+
+enum Planet {
+    Earth = 31558000,
+    Mercury = 7600525,
+    Venus = 19411026,
+    Mars = 59359776,
+    Jupiter = 374222565,
+    Saturn = 928792569,
+    Uranus = 2652994591,
+    Neptune = 5196280668,
 }
