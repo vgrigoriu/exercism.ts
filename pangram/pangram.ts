@@ -6,6 +6,6 @@ export default class Pangram {
     }
 
     isPangram(): boolean {
-        return this.sentence.length > 0
+        return new Set(this.sentence.toLowerCase().split('').filter(ch => ch.match(/[a-z]/))).size == 26
     }
 }

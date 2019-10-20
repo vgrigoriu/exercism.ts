@@ -11,7 +11,7 @@ describe('Pangram()', () => {
     expect(pangram.isPangram()).toBe(true)
   })
 
-  xit("missing character 'x'", () => {
+  it("missing character 'x'", () => {
     const pangram = new Pangram("a quick movement of the enemy will jeopardize five gunboats")
     expect(pangram.isPangram()).toBe(false)
   })
