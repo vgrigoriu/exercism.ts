@@ -6,6 +6,6 @@ export default class Pangram {
     }
 
     isPangram(): boolean {
-        return false
+        return this.sentence.length > 0
     }
 }
