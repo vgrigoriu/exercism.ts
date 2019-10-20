@@ -6,6 +6,10 @@ export default class Pangram {
     }
 
     isPangram(): boolean {
-        return new Set(this.sentence.toLowerCase().split('').filter(ch => ch.match(/[a-z]/))).size == 26
+        var onlyLetters = this.sentence
+            .toLowerCase()
+            .split('')
+            .filter(ch => ch.match(/[a-z]/))
+        return new Set(onlyLetters).size == 26
     }
 }
