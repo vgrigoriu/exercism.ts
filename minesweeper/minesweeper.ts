@@ -4,6 +4,9 @@ type Cell = {
 }
 
 export default class Minesweeper {
+    static readonly BOMB_CELL = "*"
+    static readonly EMPTY_CELL = " "
+
     public annotate(table: string[]): string[] {
         const result = []
         for (let row = 0; row < table.length; row++) {
@@ -21,7 +24,7 @@ export default class Minesweeper {
 
     private annotateCell(table: string[], cell: Cell): string {
         if (this.isBomb(table, cell)) {
-            return "*"
+            return Minesweeper.BOMB_CELL
         }
 
         let noOfBombs = 0
@@ -35,7 +38,7 @@ export default class Minesweeper {
         }
 
         if (noOfBombs === 0) {
-            return " "
+            return Minesweeper.EMPTY_CELL
         }
 
         return String(noOfBombs)
@@ -49,6 +52,6 @@ export default class Minesweeper {
             return false
         }
 
-        return table[cell.row][cell.column] === "*"
+        return table[cell.row][cell.column] === Minesweeper.BOMB_CELL
     }
 }
