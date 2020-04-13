@@ -30,7 +30,7 @@ export default class Minesweeper {
         let noOfBombs = 0
         for (let i = cell.row - 1; i <= cell.row + 1; i++) {
             for (let j = cell.column - 1; j <= cell.column + 1; j++) {
-                // it's ok to count cell since we checked above that it's not '*'
+                // it's ok to count `cell` since we checked above that it's not '*'
                 if (this.isBomb(table, { row: i, column: j })) {
                     noOfBombs++
                 }
