@@ -1,11 +1,11 @@
 export default class Minesweeper {
     public annotate(table: string[]): string[] {
         const result = []
-        for (let r = 0; r < table.length; r++) {
-            const row = table[r]
+        for (let row = 0; row < table.length; row++) {
+            //const row = table[row]
             let newRow = ""
-            for (let c = 0; c < row.length; c++) {
-                newRow += this.annotateCell(table, r, c)
+            for (let column = 0; column < table[row].length; column++) {
+                newRow += this.annotateCell(table, row, column)
             }
             result.push(newRow)
         }
@@ -14,14 +14,14 @@ export default class Minesweeper {
     }
 
 
-    private annotateCell(table: string[], r: number, c: number): string {
-        if (this.isBomb(table, r, c)) {
+    private annotateCell(table: string[], row: number, column: number): string {
+        if (this.isBomb(table, row, column)) {
             return "*"
         }
 
         let noOfBombs = 0
-        for (let i = r - 1; i <= r + 1; i++) {
-            for (let j = c - 1; j <= c + 1; j++) {
+        for (let i = row - 1; i <= row + 1; i++) {
+            for (let j = column - 1; j <= column + 1; j++) {
                 // it's ok to count table[r][c] since we checked above that it's not *
                 if (this.isBomb(table, i, j)) {
                     noOfBombs++
@@ -36,14 +36,14 @@ export default class Minesweeper {
         return String(noOfBombs)
     }
 
-    private isBomb(table: string[], r: number, c: number): boolean {
-        if (r < 0 || table.length <= r) {
+    private isBomb(table: string[], row: number, column: number): boolean {
+        if (row < 0 || table.length <= row) {
             return false
         }
-        if (c < 0 || table[r].length <= c) {
+        if (column < 0 || table[row].length <= column) {
             return false
         }
 
-        return table[r][c] === "*"
+        return table[row][column] === "*"
     }
 }
