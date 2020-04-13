@@ -1,3 +1,8 @@
+type Cell = {
+    row: number,
+    column: number
+}
+
 export default class Minesweeper {
     public annotate(table: string[]): string[] {
         const result = []
@@ -5,7 +10,7 @@ export default class Minesweeper {
             //const row = table[row]
             let newRow = ""
             for (let column = 0; column < table[row].length; column++) {
-                newRow += this.annotateCell(table, row, column)
+                newRow += this.annotateCell(table, { row, column })
             }
             result.push(newRow)
         }
@@ -14,16 +19,16 @@ export default class Minesweeper {
     }
 
 
-    private annotateCell(table: string[], row: number, column: number): string {
-        if (this.isBomb(table, row, column)) {
+    private annotateCell(table: string[], cell: Cell): string {
+        if (this.isBomb(table, cell)) {
             return "*"
         }
 
         let noOfBombs = 0
-        for (let i = row - 1; i <= row + 1; i++) {
-            for (let j = column - 1; j <= column + 1; j++) {
-                // it's ok to count table[r][c] since we checked above that it's not *
-                if (this.isBomb(table, i, j)) {
+        for (let i = cell.row - 1; i <= cell.row + 1; i++) {
+            for (let j = cell.column - 1; j <= cell.column + 1; j++) {
+                // it's ok to count cell since we checked above that it's not '*'
+                if (this.isBomb(table, { row: i, column: j })) {
                     noOfBombs++
                 }
             }
@@ -36,14 +41,14 @@ export default class Minesweeper {
         return String(noOfBombs)
     }
 
-    private isBomb(table: string[], row: number, column: number): boolean {
-        if (row < 0 || table.length <= row) {
+    private isBomb(table: string[], cell: Cell): boolean {
+        if (cell.row < 0 || table.length <= cell.row) {
             return false
         }
-        if (column < 0 || table[row].length <= column) {
+        if (cell.column < 0 || table[cell.row].length <= cell.column) {
             return false
         }
 
-        return table[row][column] === "*"
+        return table[cell.row][cell.column] === "*"
     }
 }
