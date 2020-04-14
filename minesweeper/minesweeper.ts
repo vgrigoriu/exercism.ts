@@ -8,50 +8,49 @@ export default class Minesweeper {
     static readonly EMPTY_CELL = " "
 
     public annotate(table: string[]): string[] {
-        const result = []
-        for (let row = 0; row < table.length; row++) {
-            //const row = table[row]
-            let newRow = ""
-            for (let column = 0; column < table[row].length; column++) {
-                newRow += this.annotateCell(table, { row, column })
+        const annotatedTable = table.map((_, row) => {
+            return annotateRow(row)
+        })
+
+        return annotatedTable
+
+        function annotateRow (row: number): string {
+            return table[row].split('').map((_, column) => {
+                return annotateCell({ row, column })
+            }).join('')
+        }
+
+        function annotateCell(cell: Cell): string {
+            if (isBomb(table, cell)) {
+                return Minesweeper.BOMB_CELL
             }
-            result.push(newRow)
-        }
-
-        return result
-    }
-
-
-    private annotateCell(table: string[], cell: Cell): string {
-        if (this.isBomb(table, cell)) {
-            return Minesweeper.BOMB_CELL
-        }
-
-        let noOfBombs = 0
-        for (let i = cell.row - 1; i <= cell.row + 1; i++) {
-            for (let j = cell.column - 1; j <= cell.column + 1; j++) {
-                // it's ok to count `cell` since we checked above that it's not '*'
-                if (this.isBomb(table, { row: i, column: j })) {
-                    noOfBombs++
+    
+            let noOfBombs = 0
+            for (let i = cell.row - 1; i <= cell.row + 1; i++) {
+                for (let j = cell.column - 1; j <= cell.column + 1; j++) {
+                    // it's ok to count `cell` since we checked above that it's not '*'
+                    if (isBomb(table, { row: i, column: j })) {
+                        noOfBombs++
+                    }
                 }
             }
+    
+            if (noOfBombs === 0) {
+                return Minesweeper.EMPTY_CELL
+            }
+    
+            return String(noOfBombs)
         }
 
-        if (noOfBombs === 0) {
-            return Minesweeper.EMPTY_CELL
+        function isBomb(table: string[], cell: Cell): boolean {
+            if (cell.row < 0 || table.length <= cell.row) {
+                return false
+            }
+            if (cell.column < 0 || table[cell.row].length <= cell.column) {
+                return false
+            }
+    
+            return table[cell.row][cell.column] === Minesweeper.BOMB_CELL
         }
-
-        return String(noOfBombs)
-    }
-
-    private isBomb(table: string[], cell: Cell): boolean {
-        if (cell.row < 0 || table.length <= cell.row) {
-            return false
-        }
-        if (cell.column < 0 || table[cell.row].length <= cell.column) {
-            return false
-        }
-
-        return table[cell.row][cell.column] === Minesweeper.BOMB_CELL
     }
 }
