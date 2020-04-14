@@ -8,48 +8,45 @@ export default class Minesweeper {
     static readonly EMPTY_CELL = " "
 
     public annotate(table: string[]): string[] {
-        const annotatedTable = table.map((_, row) => {
-            return annotateRow(row)
-        })
-
-        return annotatedTable
-
-        function annotateRow (row: number): string {
-            return table[row].split('').map((_, column) => {
+        return table.map((_, row) =>
+            table[row].split('').map((_, column) => {
                 return annotateCell({ row, column })
             }).join('')
-        }
+        )
 
         function annotateCell(cell: Cell): string {
-            if (isBomb(table, cell)) {
+            if (isBomb(cell)) {
                 return Minesweeper.BOMB_CELL
             }
-    
-            let noOfBombs = 0
-            for (let i = cell.row - 1; i <= cell.row + 1; i++) {
-                for (let j = cell.column - 1; j <= cell.column + 1; j++) {
-                    // it's ok to count `cell` since we checked above that it's not '*'
-                    if (isBomb(table, { row: i, column: j })) {
-                        noOfBombs++
-                    }
-                }
-            }
-    
-            if (noOfBombs === 0) {
+
+            const howManyBombNeighbors = neighbors(cell)
+                .filter(isInsideTable)
+                .filter(isBomb)
+                .length
+
+            if (howManyBombNeighbors === 0) {
                 return Minesweeper.EMPTY_CELL
             }
-    
-            return String(noOfBombs)
+
+            return String(howManyBombNeighbors)
         }
 
-        function isBomb(table: string[], cell: Cell): boolean {
-            if (cell.row < 0 || table.length <= cell.row) {
-                return false
-            }
-            if (cell.column < 0 || table[cell.row].length <= cell.column) {
-                return false
-            }
-    
+        function neighbors(cell: Cell): Cell[] {
+            const cells = [-1, 0, 1].map(deltaRow =>
+                [-1, 0, 1].map(deltaColumn => {
+                    return { row: cell.row + deltaRow, column: cell.column + deltaColumn }
+                })
+            )
+
+            return [].concat.apply([], cells)
+        }
+
+        function isInsideTable(cell: Cell) {
+            return 0 <= cell.row && cell.row < table.length
+                && 0 <= cell.column && cell.column < table[cell.row].length
+        }
+
+        function isBomb(cell: Cell): boolean {
             return table[cell.row][cell.column] === Minesweeper.BOMB_CELL
         }
     }
