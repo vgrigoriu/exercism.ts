@@ -32,16 +32,14 @@ export default class Minesweeper {
         }
 
         function neighbors(cell: Cell): Cell[] {
-            const cells = [-1, 0, 1].map(deltaRow =>
+            return [-1, 0, 1].flatMap(deltaRow =>
                 [-1, 0, 1].map(deltaColumn => {
                     return { row: cell.row + deltaRow, column: cell.column + deltaColumn }
                 })
             )
-
-            return [].concat.apply([], cells)
         }
 
-        function isInsideTable(cell: Cell) {
+        function isInsideTable(cell: Cell): boolean {
             return 0 <= cell.row && cell.row < table.length
                 && 0 <= cell.column && cell.column < table[cell.row].length
         }
